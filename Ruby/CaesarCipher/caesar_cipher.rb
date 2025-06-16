@@ -1,18 +1,21 @@
-def run_cipher(entry, shift_factor = 5)
+# frozen_string_literal: true
+
+RANGE = 'z'.ord - 'a'.ord
+UPCASE_PIVOT = 'A'.ord
+LOWERCASE_PIVOT = 'a'.ord
+
+def run_cipher(entry, shift_factor = 5) # rubocop:disable Metrics/AbcSize,Metrics/MethodLength
   chars = entry.chars
-  range = 'z'.ord - 'a'.ord
-  upcase_pivot = 'A'.ord
-  lowercase_pivot = 'a'.ord
   chars.map! do |char|
-    if char.ord.between?(upcase_pivot-1, upcase_pivot + range + 1)
-      #character is uppercase
-      shiftedOrd = char.ord + shift_factor - upcase_pivot
-      shiftedOrd = (shiftedOrd % (range + 1)) + upcase_pivot
-      shiftedOrd.chr
-    elsif char.ord.between?(lowercase_pivot-1, lowercase_pivot + range + 1)
-      shiftedOrd = char.ord + shift_factor - lowercase_pivot
-      shiftedOrd = (shiftedOrd % (range + 1)) + lowercase_pivot
-      shiftedOrd.chr   
+    if char.ord.between?(UPCASE_PIVOT - 1, UPCASE_PIVOT + RANGE + 1)
+      # character is uppercase
+      shifted_ord = char.ord + shift_factor - UPCASE_PIVOT
+      shifted_ord = (shifted_ord % (RANGE + 1)) + UPCASE_PIVOT
+      shifted_ord.chr
+    elsif char.ord.between?(LOWERCASE_PIVOT - 1, LOWERCASE_PIVOT + RANGE + 1)
+      shifted_ord = char.ord + shift_factor - LOWERCASE_PIVOT
+      shifted_ord = (shifted_ord % (RANGE + 1)) + LOWERCASE_PIVOT
+      shifted_ord.chr
     else
       char
     end
@@ -20,8 +23,7 @@ def run_cipher(entry, shift_factor = 5)
   chars.join
 end
 
-puts "Please enter a string to cipher!"
+puts 'Please enter a string to cipher!'
 entry = gets
 
 puts run_cipher(entry)
-
