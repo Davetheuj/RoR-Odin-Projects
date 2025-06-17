@@ -1,0 +1,11 @@
+Style/StringLiterals:
+  EnforcedStyle: double_quotes
+
+Style/FrozenStringLiteralComment:
+  EnforcedStyle: always
+
+AllCops:
+  NewCops: enable
+  SuggestExtensions: false
+
+plugins: rubocop-performance 
